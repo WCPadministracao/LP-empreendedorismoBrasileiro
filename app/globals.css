@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
+/*
+  ABEMP — tokens derivados da logo oficial (contagem de pixels do PNG):
+  navy #001E55 (dominante), navy profundo #001043, azul #0082D5,
+  verde #02873C, amarelo #FDCA14.
+*/
+@theme {
+  --color-navy: #001e55;
+  --color-navy-deep: #001043;
+  --color-navy-soft: #16366f;
+  --color-blue: #0082d5;
+  --color-green: #02873c;
+  --color-yellow: #fdca14;
+
+  --color-green-deep: #04632f;
+  --color-ink: #46505f;
+  --color-ink-muted: #5a6475;
+  --color-rule: #dfe4ec;
+  --color-surface-green: #e3efe6;
+  --color-rule-green: #bcd6c4;
+
+  --font-display: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Em @layer base para que as utilities do Tailwind continuem vencendo. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* evita que o pull-to-refresh do mobile sequestre o scroll */
+    overscroll-behavior-y: none;
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    /* sem flash cinza ao tocar em links/botões no mobile */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  /* Alvos de toque não devem selecionar texto em long-press */
+  a[role="button"],
+  button {
+    user-select: none;
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+  Único momento de movimento não acionado pelo usuário na página:
+  a entrada do hero, escalonada em 70ms. Transform + opacity apenas.
+*/
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.rise {
+  animation: rise 620ms var(--ease-out-soft) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
