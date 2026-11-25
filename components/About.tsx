@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { PresidentPhoto } from "./PresidentPhoto";
 
 /*
   Texto institucional neutro e propositalmente genérico: substituível pela
@@ -41,6 +42,65 @@ export function About() {
           </p>
         </div>
       </div>
+
+      <section
+        aria-labelledby="palavra-do-presidente"
+        className="border-t border-rule bg-white text-ink"
+      >
+        <div className="grid lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)]">
+          <PresidentPhoto />
+
+          <div className="w-full max-w-2xl self-center px-5 py-12 sm:px-8 sm:py-16 xl:px-14">
+            <h2
+              id="palavra-do-presidente"
+              className="text-3xl leading-tight font-semibold sm:text-4xl"
+            >
+              Palavra do presidente
+            </h2>
+
+            <div className="mt-6 space-y-4 text-lg leading-relaxed">
+              <p>
+                Acreditamos que o empreendedorismo é uma das maiores forças de
+                transformação econômica e social do Brasil. É por meio da
+                coragem de empreender, da inovação e da capacidade de superar
+                desafios que construímos oportunidades, geramos empregos e
+                impulsionamos o desenvolvimento do nosso país.
+              </p>
+              <p>
+                A ABEMP — Associação Brasileira de Empreendedorismo tem o
+                compromisso de unir pessoas, fortalecer negócios, ampliar
+                oportunidades e dar voz a quem acredita no potencial de
+                empreender.
+              </p>
+              <p>
+                Mais do que representar empreendedores, queremos construir
+                conexões, estimular o conhecimento, defender a competitividade
+                e contribuir para um ambiente de negócios mais justo, moderno e
+                próspero.
+              </p>
+              <p>
+                Nosso propósito é claro:{" "}
+                <strong className="font-semibold text-green-deep">
+                  “Fortalecendo quem empreende. Transformando o Brasil.”
+                </strong>
+              </p>
+              <p>
+                Porque acreditamos que um Brasil mais forte começa com
+                empreendedores mais fortes.
+              </p>
+            </div>
+
+            <div className="mt-7 border-t border-rule pt-5">
+              <p className="font-display text-lg font-semibold text-navy">
+                André Ursini
+              </p>
+              <p className="mt-1 text-base text-ink-muted">
+                Presidente da ABEMP — Associação Brasileira de Empreendedorismo
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   );
 }

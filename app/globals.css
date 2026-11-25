@@ -72,10 +72,7 @@
   }
 }
 
-/*
-  Único momento de movimento não acionado pelo usuário na página:
-  a entrada do hero, escalonada em 70ms. Transform + opacity apenas.
-*/
+/* Entrada do hero, escalonada em 70ms. */
 @keyframes rise {
   from {
     opacity: 0;
@@ -89,6 +86,17 @@
 
 .rise {
   animation: rise 620ms var(--ease-out-soft) backwards;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .president-photo {
+    transition: opacity 900ms ease;
+  }
+
+  .president-photo[data-reveal-pending] {
+    opacity: 0;
+    transition: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
